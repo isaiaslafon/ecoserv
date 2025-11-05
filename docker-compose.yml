@@ -1,0 +1,35 @@
+services:
+
+  db:
+    image: postgres:15-alpine
+    env_file:
+      - .env
+    networks:
+      - wikinet
+    logging:
+      driver: none
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  wiki:
+    image: wikijs-mi 
+    env_file: 
+      - .env
+    networks:
+      - wikinet  
+    volumes:
+      - certs-wiki:/wiki/ssl
+      - ./config.yml:/wiki/config.yml
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - "80:3000"
+      - "3443:3443"
+volumes:
+  db-data:
+  certs-wiki:
+
+networks:
+  wikinet:
