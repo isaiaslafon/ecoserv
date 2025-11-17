@@ -1,0 +1,12 @@
+# Chequear la versino con el compose.
+FROM ghcr.io/requarks/wiki:2
+
+# Instalar openssl (usa apk porque la imagen base es Alpine)
+USER root
+
+COPY generate-certs.sh /entrypoint.sh
+RUN apk add --no-cache openssl && \
+    chmod +x /entrypoint.sh && \
+    rm -f /wiki/config.yml
+
+ENTRYPOINT ["/entrypoint.sh"]

@@ -1,10 +1,30 @@
-# wikijs para testear junto a los otros service.
+# Ecoserv
 
-Asi como esta lo que hace es levantar un wikijs, generar un cert para el dominio ficticio wiki.local y dejar todo andando.
+La idea es tener un repo que tenga por carpeta cada servicio orientado a dicha VM.
+
+Y tener centralizado una isntancia de Nginx para reverse proxy y un PostgreSQL para metadata de los servicios.
+
+## Monitoreo:
+
+ - Kuma Uptime
+ - Netdata
+
+## Versionado:
+
+ - Forgejo (Community Version of Gitea)
+
+## Administración de DBs
+
+ - Adminer
+
+## Documentación:
+
+( - WikiJS )
+
+## Manejo de Proyectos:
+
+( - OpenProject (community Edition) )
 
 
-## Aclaraciones
 
-Para que funcione el dominio modificar el archivo /etc/hosts agregando 127.0.0.1 wiki.local
-Hay que modificarlo para que tome de las .env y no del config.yml (o quizas conviene dejarlo asi si el .env lo usan los otros servicios?)
-para que tome el https primero hay que entrar a http://127.0.0.1:80 y hacer la instalacion de wikijs (en dominio poner https://kiwi.local
+
