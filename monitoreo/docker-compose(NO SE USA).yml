@@ -70,5 +70,7 @@ volumes:  # For NETDATA, add Uptime Kuma logs
   netdatacache:
 
 networks:
-  kuma_network:
-    driver: bridge
+  backend:
+    external: true
+  #kuma_network:
+  # driver: bridge

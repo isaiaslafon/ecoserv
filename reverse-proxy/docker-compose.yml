@@ -1,7 +1,7 @@
 services:
   nginx:
     image: nginx:stable-alpine #'jc21/nginx-proxy-manager:latest'
-    container_name: nginx
+    container_name: proxy
     restart: unless-stopped
     ports:
       - '80:80'
@@ -11,11 +11,11 @@ services:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
     networks:
-      - proxy-network
-
+      - backend
+      
 networks:
-      proxy-network:
-        driver: bridge
+  backend:
+    driver: bridge
 
 
 

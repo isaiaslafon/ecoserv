@@ -13,7 +13,7 @@ services:
       - TZ=UTC  # Set the timezone (change to your preferred local timezone so monitoring times are the same)
       - UMASK=0022  # Set your file permissions manually
     networks:
-      - kuma_network  # add your own custom network config
+      - backend  # add your own custom network config
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3001"]
       interval: 30s
@@ -27,7 +27,7 @@ services:
         max-file: "3"
 
 networks:
-  kuma_network:
-    driver: bridge
+  backend:
+    external: true
 
 

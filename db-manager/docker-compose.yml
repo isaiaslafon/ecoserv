@@ -8,8 +8,8 @@ services:
     environment:
       ADMINER_DESIGN: pepa-linha-dark # Optional: Set a theme (e.g., 'pepa-linha', 'nette', etc.)
     networks:
-      - nginx-proxy
+      - backend
 
 networks:
-  nginx-proxy:
-    driver: bridge
+  backend:
+    external: true

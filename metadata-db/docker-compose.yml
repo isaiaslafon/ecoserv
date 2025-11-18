@@ -8,12 +8,10 @@ services:
       - db:/var/lib/postgresql/data
       #- ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d  # add entry point to create tables for every needed service ?
     networks:
-        - nginx-proxy
+        - backend
   
 volumes:
   metadata-db:
 networks:
-  nginx-proxy:
-    driver: bridge
   backend:
-    driver: bridge
+    external: true
