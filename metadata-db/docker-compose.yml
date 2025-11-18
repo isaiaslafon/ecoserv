@@ -13,5 +13,5 @@ services:
 volumes:
   metadata-db:
 networks:
-  backend:
+  proxy_backend:
     external: true
