@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:16
+    container_name: metadata-db
+    restart: always
+    env_file: .env
+    volumes:
+      - db:/var/lib/postgresql/data
+      #- ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d  # add entry point to create tables for every needed service ?
+    networks:
+        - nginx-proxy
+  
+volumes:
+  metadata-db:
+networks:
+  nginx-proxy:
+    driver: bridge
+  backend:
+    driver: bridge

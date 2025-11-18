@@ -1,0 +1,15 @@
+services:
+  adminer:
+    image: adminer:4.8.1 # Official Adminer image
+    container_name: db-manager
+    restart: always
+    ports:
+      - "9080:8080" # Access Adminer via http://localhost:9080 ¿Se debería cambiar?
+    environment:
+      ADMINER_DESIGN: pepa-linha-dark # Optional: Set a theme (e.g., 'pepa-linha', 'nette', etc.)
+    networks:
+      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    driver: bridge

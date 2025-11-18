@@ -1,0 +1,56 @@
+services:
+  nginx:
+    image: nginx:stable-alpine #'jc21/nginx-proxy-manager:latest'
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - proxy-network
+
+networks:
+      proxy-network:
+        driver: bridge
+
+
+
+
+  # nginx-http:
+  #   image: nginx:latest
+  #   container_name: superset-nginx-http
+  #   restart: unless-stopped
+  #   profiles: [http, pgadmin] # Este servicio solo se activa con el perfil "http y pgadmin"
+  #   ports:
+  #     - 83:80
+  #   volumes:
+  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./nginx/conf.d/superset_http.conf:/etc/nginx/conf.d/superset.conf:ro # Montamos solo la config HTTP
+  #   networks:
+  #     - superset-net
+  #   depends_on:
+  #     - superset
+
+  # nginx-ssl:
+  #   image: nginx:latest
+  #   container_name: superset-nginx-ssl
+  #   restart: unless-stopped
+  #   profiles: [ssl] # Este servicio solo se activa con el perfil "ssl"
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   env_file: .env # Carga el .env para usar ${DOMAIN_NAME}
+  #   volumes:
+  #     # Monta la configuración de Nginx y el template de SSL procesado
+  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./nginx/conf.d/superset_ssl.conf:/etc/nginx/conf.d/superset.conf:ro # Montamos solo la config SSL
+  #     # Monta el directorio de certificados
+  #     - ./nginx/certs:/etc/nginx/certs:ro
+  #   networks:
+  #     - superset-net
+  #   depends_on:
+  #     - superset
