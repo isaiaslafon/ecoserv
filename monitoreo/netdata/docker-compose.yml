@@ -1,45 +1,81 @@
-
 services:
-  caddy: # For NETDATA
-    image: caddy:2
-    extra_hosts:
-      - "host.docker.internal:host-gateway" # To access netdata running with "network_mode: host".
-    ports:
-      - "81:80"
-      - "443:443"
-    volumes:
-      - ./opt/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
   netdata:
     image: netdata/netdata
     container_name: netdata
-    pid: host
-    network_mode: host
+    hostname: netdata
     restart: unless-stopped
+    ports:
+      - "19999:19999"  # Remove network_mode: host and use port mapping
     cap_add:
       - SYS_PTRACE
-      - SYS_ADMIN
     security_opt:
       - apparmor:unconfined
     volumes:
       - netdataconfig:/etc/netdata
       - netdatalib:/var/lib/netdata
       - netdatacache:/var/cache/netdata
-      - /:/host/root:ro,rslave
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
-      - /etc/localtime:/etc/localtime:ro
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
-      - /etc/os-release:/host/etc/os-release:ro
-      - /var/log:/host/var/log:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./netdata.conf:/etc/netdata/netdata.conf:ro
+    environment:
+      - NETDATA_DISABLE_CLOUD=1
+    networks:
+      - proxy_network  # General reverse proxy network.
 
-
-volumes:  # For NETDATA, add Uptime Kuma logs
-  caddy_data:
-  caddy_config:
+volumes:
   netdataconfig:
   netdatalib:
   netdatacache:
+
+networks:
+  proxy_network:
+    external: true  # Use your existing network
+
+
+# services:
+#   caddy: # For NETDATA
+#     image: caddy:2
+#     extra_hosts:
+#       - "host.docker.internal:host-gateway" # To access netdata running with "network_mode: host".
+#     ports:
+#       - "81:80"
+#       - "443:443"
+#     volumes:
+#       - ./opt/Caddyfile:/etc/caddy/Caddyfile
+#       - caddy_data:/data
+#       - caddy_config:/config
+#   netdata:
+#     image: netdata/netdata
+#     container_name: netdata
+#     pid: host
+#     network_mode: host
+#     restart: unless-stopped
+#     cap_add:
+#       - SYS_PTRACE
+#       - SYS_ADMIN
+#     security_opt:
+#       - apparmor:unconfined
+#     volumes:
+#       - netdataconfig:/etc/netdata
+#       - netdatalib:/var/lib/netdata
+#       - netdatacache:/var/cache/netdata
+#       - /:/host/root:ro,rslave
+#       - /etc/passwd:/host/etc/passwd:ro
+#       - /etc/group:/host/etc/group:ro
+#       - /etc/localtime:/etc/localtime:ro
+#       - /proc:/host/proc:ro
+#       - /sys:/host/sys:ro
+#       - /etc/os-release:/host/etc/os-release:ro
+#       - /var/log:/host/var/log:ro
+#       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+
+# volumes:  # For NETDATA, add Uptime Kuma logs
+#   caddy_data:
+#   caddy_config:
+#   netdataconfig:
+#   netdatalib:
+#   netdatacache:
