@@ -6,7 +6,7 @@ services:
     env_file: .env
     volumes:
       - metadata-db:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ../init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - ecoserv-net
     # solo expone puerto si vos necesitás acceder desde el host

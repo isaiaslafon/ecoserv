@@ -9,7 +9,7 @@ db:
   port: 5432
   user: wikijs
   pass: wikijs
-  db: wiki
+  db: wikijs
   ssl: false
 
 
