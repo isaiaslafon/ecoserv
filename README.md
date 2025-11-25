@@ -4,6 +4,10 @@ La idea es tener un repo que tenga por carpeta cada servicio orientado a dicha V
 
 Y tener centralizado una isntancia de Nginx para reverse proxy y un PostgreSQL para metadata de los servicios.
 
+## Proxy Reverso:
+
+ - Nginx
+
 ## Monitoreo:
 
  - Kuma Uptime
