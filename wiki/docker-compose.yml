@@ -1,0 +1,17 @@
+services:
+
+  wiki:
+    image: ghcr.io/requarks/wiki:2
+    networks:
+      - ecoserv-net
+    volumes:
+      - ./config.yml:/wiki/config.yml
+    depends_on:
+      - metadata-db
+    restart: unless-stopped
+    # No ports — nginx lo accede por "wiki:3000"
+
+networks:
+  ecoserv-net:
+    external: true
+
