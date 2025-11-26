@@ -2,6 +2,7 @@ services:
 
   wiki:
     image: ghcr.io/requarks/wiki:2
+    container_name: wiki
     networks:
       - ecoserv-net
     volumes:

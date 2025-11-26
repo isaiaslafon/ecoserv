@@ -1,6 +1,7 @@
 services:
   nginx:
     image: nginx:stable-alpine
+    container_name: nginx
     restart: unless-stopped
     ports:
       - "80:80"
@@ -12,9 +13,6 @@ services:
     networks:
       - ecoserv-net
 
-
-
 networks:
   ecoserv-net:
     external: true
-
