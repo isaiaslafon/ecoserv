@@ -6,6 +6,8 @@ services:
       - USER_UID=1000
       - USER_GID=1000
 
+      - DEFAULT_THEME=forgejo-light
+
       # Database config (PostgreSQL central)
       - FORGEJO__database__DB_TYPE=postgres
       - FORGEJO__database__HOST=metadata-db:5432
