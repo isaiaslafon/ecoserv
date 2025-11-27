@@ -1,0 +1,63 @@
+services:
+
+  nginx:
+    extends:
+      file: ./nginx/docker-compose.yml
+      service: nginx
+    networks:
+      - ecoserv-net    # << agregar acá porque extends NO lo hereda
+
+  metadata-db:
+    extends:
+      file: ./metadata-db/docker-compose.yml
+      service: db
+    networks:
+      - ecoserv-net
+
+  wiki:
+    extends:
+      file: ./wiki/docker-compose.yml
+      service: wiki
+    networks:
+      - ecoserv-net
+      
+ 
+  forgejo:
+    extends:
+      file: ./versionado/docker-compose.yml
+      service: server
+    networks:
+      - ecoserv-net
+
+  uptime-kuma:
+    extends:
+      file: ./monitoreo/uptime-kuma/docker-compose.yml
+      service: uptime-kuma
+    networks:
+      - ecoserv-net
+
+  netdata:
+    extends:
+      file: ./monitoreo/netdata/docker-compose.yml
+      service: netdata
+    networks:
+      - ecoserv-net
+
+  adminer:
+    extends:
+      file: ./db-manager/docker-compose.yml
+      service: adminer
+    networks:
+      - ecoserv-net
+
+networks:
+  ecoserv-net:
+    external: true
+
+volumes:
+  kuma-data:
+  metadata-db:
+  netdataconfig:
+  netdatalib:
+  netdatacache:
+

@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:16
+    container_name: metadata-db
+    restart: always
+    env_file: .env
+    volumes:
+      - metadata-db:/var/lib/postgresql/data
+      - ../init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - ecoserv-net
+    # solo expone puerto si vos necesitás acceder desde el host
+    # ports:
+    #   - "5432:5432"
+
+volumes:
+  metadata-db:
+
+networks:
+  ecoserv-net:
+    external: true
+

@@ -1,0 +1,17 @@
+services:
+  adminer:
+    image: adminer:4.8.1
+    container_name: db-manager
+    restart: always
+    environment:
+      ADMINER_DESIGN: pepa-linha-dark
+      VIRTUAL_HOST: adminer.midominio.com
+      LETSENCRYPT_HOST: adminer.midominio.com
+      LETSENCRYPT_EMAIL: mail@dominio.com
+    networks:
+      - ecoserv-net
+
+networks:
+  ecoserv-net:
+    external: true
+
