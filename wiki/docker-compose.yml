@@ -8,11 +8,11 @@ services:
     volumes:
       - ./config.yml:/wiki/config.yml
     depends_on:
-      - metadata-db
+      - db
     restart: unless-stopped
     # No ports — nginx lo accede por "wiki:3000"
 
-networks:
-  ecoserv-net:
-    external: true
+# networks:
+#   ecoserv-net:
+#     external: true
 

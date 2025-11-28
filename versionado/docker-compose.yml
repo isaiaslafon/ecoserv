@@ -27,9 +27,9 @@ services:
       - "222:22"   # SSH para git clone/push
 
     depends_on:
-      - metadata-db
+      - db
 
-networks:
-  ecoserv-net:
-    external: true
+# networks:
+#   ecoserv-net:
+#     external: true
 

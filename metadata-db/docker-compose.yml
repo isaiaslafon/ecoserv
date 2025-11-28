@@ -15,8 +15,8 @@ services:
 
 volumes:
   metadata-db:
+    external: false
 
-networks:
-  ecoserv-net:
-    external: true
-
+# networks:
+#   ecoserv-net:
+#     external: true

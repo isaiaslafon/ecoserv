@@ -1,4 +1,33 @@
 services:
+  # cert-generator:
+  #   image: alpine:latest
+  #   container_name: cert-generator
+  #   profile: ["test"]
+  #   volumes:
+  #     - ./certs:/certs
+  #   # command: |
+  #   #   sh -c "
+  #   #     apk add --no-cache openssl &&
+  #   #     mkdir -p /certs/adminer /certs/forgejo /certs/netdata /certs/uptimekuma /certs/wiki &&
+        
+  #   #     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  #   #       -keyout /certs/adminer/privkey.pem \
+  #   #       -out /certs/adminer/fullchain.pem \
+  #   #       -subj '/C=AR/ST=Buenos Aires/L=Buenos Aires/O=Ecoserv/CN=adminer.local' \
+  #   #       -addext 'subjectAltName=DNS:adminer.local,DNS:localhost,IP:127.0.0.1' &&
+          
+  #   #     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  #   #       -keyout /certs/forgejo/privkey.pem \
+  #   #       -out /certs/forgejo/fullchain.pem \
+  #   #       -subj '/C=AR/ST=Buenos Aires/L=Buenos Aires/O=Ecoserv/CN=forgejo.local' \
+  #   #       -addext 'subjectAltName=DNS:forgejo.local,DNS:localhost,IP:127.0.0.1' &&
+          
+  #   #     echo 'Certificates generated successfully'
+  #   #   "
+  #   restart: false
+  #   networks:
+  #     - ecoserv-net
+  
   nginx:
     image: nginx:stable-alpine
     container_name: nginx
@@ -13,6 +42,7 @@ services:
     networks:
       - ecoserv-net
 
-networks:
-  ecoserv-net:
-    external: true
+
+# networks:
+#   ecoserv-net:
+#     external: true

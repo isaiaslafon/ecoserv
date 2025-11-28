@@ -27,8 +27,9 @@ services:
 
 volumes:
   kuma-data:
+    external: false
 
-networks:
-  ecoserv-net:
-    external: true
+# networks:
+#   ecoserv-net:
+#     external: true
 

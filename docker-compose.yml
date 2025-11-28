@@ -1,40 +1,49 @@
 name: ecoserv 
 
-services:
-  nginx:
-    extends:
-      file: ./proxy/docker-compose.yml
-      service: nginx
+include:
+  - path: ./proxy/docker-compose.yml
+  - path: ./monitoreo/uptime-kuma/docker-compose.yml
+  - path: ./monitoreo/netdata/docker-compose.yml
+  - path: ./metadata-db/docker-compose.yml
+  - path: ./wiki/docker-compose.yml
+  - path: ./versionado/docker-compose.yml
+  - path: ./db-manager/docker-compose.yml
 
-  metadata-db:
-    extends:
-      file: ./metadata-db/docker-compose.yml
-      service: db
+# services:
+#   nginx:
+#     extends:
+#       file: ./proxy/docker-compose.yml
+#       service: nginx
 
-  wiki:
-    extends:
-      file: ./wiki/docker-compose.yml
-      service: wiki
+#   metadata-db:
+#     extends:
+#       file: ./metadata-db/docker-compose.yml
+#       service: db
 
-  forgejo:
-    extends:
-      file: ./versionado/docker-compose.yml
-      service: server
+#   wiki:
+#     extends:
+#       file: ./wiki/docker-compose.yml
+#       service: wiki
 
-  uptime-kuma:
-    extends:
-      file: ./monitoreo/uptime-kuma/docker-compose.yml
-      service: uptime-kuma
+#   forgejo:
+#     extends:
+#       file: ./versionado/docker-compose.yml
+#       service: server
 
-  netdata:
-    extends:
-      file: ./monitoreo/netdata/docker-compose.yml
-      service: netdata
+#   uptime-kuma:
+#     extends:
+#       file: ./monitoreo/uptime-kuma/docker-compose.yml
+#       service: uptime-kuma
 
-  adminer:
-    extends:
-      file: ./db-manager/docker-compose.yml
-      service: adminer
+#   netdata:
+#     extends:
+#       file: ./monitoreo/netdata/docker-compose.yml
+#       service: netdata
+
+#   adminer:
+#     extends:
+#       file: ./db-manager/docker-compose.yml
+#       service: adminer
 
 networks:
   ecoserv-net:
@@ -43,10 +52,10 @@ networks:
     external: false # It's created when for this services.
     name: ecoserv-net # custom name to avoid naming with project.
   
-volumes:
-  kuma-data:
-  metadata-db:
-  netdataconfig:
-  netdatalib:
-  netdatacache:
+# volumes:
+#   kuma-data:
+#   metadata-db:
+#   netdataconfig:
+#   netdatalib:
+#   netdatacache:
 

@@ -11,6 +11,6 @@ services:
     networks:
       - ecoserv-net
 
-networks:
-  ecoserv-net:
-    external: true
+# networks:
+#   ecoserv-net:
+#     external: true
